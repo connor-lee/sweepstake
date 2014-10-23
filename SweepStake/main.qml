@@ -2,75 +2,49 @@ import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.1
 
+import datamodel 1.0
+
 Window {
     id: window
     visible: true
     width: 320
     height: 480
-    Component.onCompleted: buttons.add(button)
 
-    ColumnLayout {
-        anchors.fill: parent
-
-        Rectangle {
-            id: topBar
-            color: "light grey"
-            Layout.fillWidth: true
-            Layout.preferredHeight: 50
-            anchors.top: parent.top
-
-            ListView {
-                id: buttons
-                anchors.verticalCenter: topBar.verticalCenter
-                orientation: ListView.Horizontal
-                delegate: button
+    Loader {
+        id: mainArea
+        z: 2
+        height: parent.height
+        width: parent.width
+        onSourceChanged: {
+            if (mainArea.source != "")
+            {
+                background.visible = true;
             }
-            Rectangle {
-                id: button
-                property var icon
-                color: "#FFFFFF"
-                border.color: "grey"
-                border.width: 2
-                height: topBar.height - 5
-                width: height
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onHoveredChanged:
-                    {
-                        if (button.color == "#FFFFFF")
-                        {
-                            button.color = "light blue"
-                            console.log("lulz")
-                        }
-                        else {
-                            button.color = "#FFFFFF"
-                        }
-                    }
-
-                    onClicked: {
-                        if (index === 0)
-                        {
-                            mainArea.source = "homeScreen.qml"
-                        }
-                        if (index === 1)
-                        {
-                            mainArea.source = "managePeople.qml"
-                        }
-                        if (index === 2)
-                        {
-                            mainArea.source = ""
-                        }
-                    }
-                }
+            else
+            {
+                background.visible = false;
             }
-        }
-        Loader {
-            id: mainArea
-            height: window.height - topBar.height
-            width: window.width
         }
     }
 
+
+    Rectangle {
+        anchors.fill: parent
+        id: background
+        color: "black"
+        opacity: 0.5
+        visible: false
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                console.log("fuck you")
+            }
+        }
+    }
+
+
+    ColumnLayout {
+        anchors.fill: parent
+    }
 }

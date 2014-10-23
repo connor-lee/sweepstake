@@ -1,20 +1,20 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-using namespace std;
+#include <string>
 
 class player
 {
 public:
     player(std::string name, std::string email);
-    void getName();
-    void getEmail();
-    void setName(string name);
-    void setEmail(string email);
+    std::string name();
+    std::string email();
+    void setName(std::string name);
+    void setEmail(std::string email);
 
 private:
-    string _name;
-    string _email;
+    std::string _name;
+    std::string _email;
 };
 
 #endif // PLAYER_H

@@ -4,12 +4,12 @@ player::player(std::string name, std::string email)
 {
 }
 
-void player::getName()
+std::string player::name()
 {
     return _name;
 }
 
-void player::getEmail()
+std::string player::email()
 {
     return _email;
 }
